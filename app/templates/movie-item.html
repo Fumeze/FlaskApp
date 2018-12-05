@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block title %}{{ item.movie_title }}{% endblock %}
+{% block body %}
+    <div class="jumbotron">
+        <h3>{{ item.movie_title }}</h3><br>
+        <div><img src="{{ item.movie_img }}"></div>
+        <div id="info">
+            <span>导演</span>: {{ item.director }}<br>
+            <span>编剧</span>: {{ item.screenwriter }}<br>
+            <span>主演</span>: {{ item.starring }}<br>
+            <span>类型:</span> {{ item.type }}<br>
+            <span>制片国家/地区:</span>{{ item.production_country }}<br>
+            <span>语言:</span>{{ item.language }}<br>
+            <span>上映日期:</span>{{ item.release_time }}<br>
+            <span>片长:</span> {{ item.length }}<br>
+            <span>又名:</span>{{ item.alias }}<br>
+            <span>IMDb链接:</span> <a href="{{ item.imdb_link }}" target="_blank">{{ item.imdb_link }}</a><br>
+            <span>得分:</span>{{ item.score }}<br>
+            <span>评分人数:</span>{{ item.score_count }}<br>
+            <span>短评论数:</span>{{ item.comment_count }}<br>
+            <span>长评论数:</span>{{ item.review_count }}<br>
+        </div>
+    </div>
+    <div class="jumbotron">
+    </div>
+    <div class="jumbotron">
+    </div>
+{% endblock %}

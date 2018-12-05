@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block title %}类型搜索{% endblock %}
+{% block body %}
+    <br><br>
+    <form class="form-inline my-2 my-lg-0" action="{{ url_for('search') }}" method="GET">
+        <input class="form-control mr-sm-2" name="type" placeholder="搜索类别">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+{% endblock %}
