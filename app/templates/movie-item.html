@@ -4,8 +4,10 @@
 {% endblock %}
 {% block title %}{{ item.movie_title }}{% endblock %}
 {% block body %}
+    <br>
     <div class="jumbotron">
-        <h3>{{ item.movie_title }}</h3><br>
+        <h3><a href="https://movie.douban.com/subject/{{ item.movie_id }}" target="_blank"> {{ item.movie_title }}</a>
+        </h3><br>
         <div><img src="{{ item.movie_img }}"></div>
         <div id="info">
             <span>导演</span>: {{ item.director }}<br>
@@ -20,12 +22,53 @@
             <span>IMDb链接:</span> <a href="{{ item.imdb_link }}" target="_blank">{{ item.imdb_link }}</a><br>
             <span>得分:</span>{{ item.score }}<br>
             <span>评分人数:</span>{{ item.score_count }}<br>
-            <span>短评论数:</span>{{ item.comment_count }}<br>
-            <span>长评论数:</span>{{ item.review_count }}<br>
         </div>
     </div>
     <div class="jumbotron">
+        <h4>热门短评</h4>
+        <div class="text-info">该影片评论数为{{ item.comment_count|string }}</div>
+        <br>
+        <ul>
+            {% for comment in c_query %}
+                <div class="card border-light mb-3">
+                    <div class="card-header">
+                        <span>评论ID:{{ comment.comment_id }}&emsp;</span>
+                        <span>用户名:{{ comment.comment_username }}&emsp;</span>
+                        <span>评论时间:{{ comment.comment_time }}&emsp;</span>
+                        <span>有用数:{{ comment.comment_votes }}&emsp;</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{ comment.comment_content }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </ul>
     </div>
     <div class="jumbotron">
+        <h4>热门剧评</h4>
+        <div class="text-info">该影片剧评数为{{ item.review_count|string }}</div>
+        <br>
+        <ul>
+            {% for review in r_query %}
+                <div class="card border-light mb-3">
+                    <div class="card-header">
+                        <span>剧评ID:{{ review.review_id }}&emsp;</span>
+                        <span>用户名:{{ review.review_username }}&emsp;</span>
+                        <span>评论时间:{{ review.review_time }}</span>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{ review.review_title }}</h4>
+                        <p class="card-text">
+                            {{ review.review_s_content }}
+                            <a href="https://movie.douban.com/review/{{ review.review_id }}" target="_blank">更多(剧评链接)</a>
+                        </p>
+                        <br>
+                        <span class="badge badge-success">有用数:{{ review.review_useful_count }}</span>
+                        <span class="badge badge-danger">没用数:{{ review.review_useless_count }}</span>
+                        <span class="badge badge-warning">回应数:{{ review.review_comment_count }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </ul>
     </div>
 {% endblock %}
